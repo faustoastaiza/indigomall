@@ -754,8 +754,22 @@ img { display: block; max-width: 100%; }
   font-family: var(--f-mono); font-size: var(--t-xs); letter-spacing: .08em; text-transform: uppercase;
   color: rgba(239,235,228,.55); margin-top: 16px;
 }
-.cta-note { display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; font-size: var(--t-xs); color: rgba(239,235,228,.6); font-family: var(--f-mono); letter-spacing: .08em; text-transform: uppercase; }
-.cta-note .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s var(--e-in-out) infinite; }
+.cta-schedule {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(239,235,228,.14);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.cta-schedule .cs-label {
+  font-family: var(--f-mono); font-size: var(--t-xs); letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(239,235,228,.55); margin-bottom: 6px;
+}
+.cta-schedule .cs-line { color: rgba(239,235,228,.85); font-size: var(--t-sm); }
+.form-disclaimer {
+  margin-top: 16px;
+  font-size: var(--t-xs); line-height: 1.5;
+  color: rgba(239,235,228,.55);
+}
 
 .form-glass {
   background: rgba(255,255,255,.06);
@@ -1398,10 +1412,14 @@ img { display: block; max-width: 100%; }
         <span class="sub">COP · Preventa últimos locales</span>
       </div>
       <p class="lead">
-        Déjanos tus datos y un asesor comercial de BTO te contacta. 20 minutos, sin compromiso — te mostramos el local, el plan de pagos y resolvemos todas tus dudas.
+        Déjanos tus datos y un asesor comercial de BTO te contactará para mostrarte el local, las formas de pago y resolver todas tus dudas.
       </p>
       <div class="micro-proof">Licencia aprobada · 76% vendido · Experiencia BTO · Ancla confirmada</div>
-      <div class="cta-note"><span class="dot"></span> Respuesta en menos de 2 horas · Lun a Sáb · 9am a 6pm</div>
+      <div class="cta-schedule">
+        <span class="cs-label">Horario de atención</span>
+        <span class="cs-line">Lunes a viernes · 9:00 a 12:00 y 2:00 a 5:30</span>
+        <span class="cs-line">Sábado · 9:00 a 4:00 pm</span>
+      </div>
     </div>
 
     <div class="form-glass">
@@ -1435,6 +1453,7 @@ img { display: block; max-width: 100%; }
           Quiero que me contacten
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
+        <p class="form-disclaimer">Al enviar aceptas que un asesor comercial de BTO te contacte. Tus datos están protegidos bajo nuestra política de tratamiento de datos.</p>
       </form>
     </div>
   </div>
