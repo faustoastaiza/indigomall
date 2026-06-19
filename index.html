@@ -216,7 +216,8 @@ img { display: block; max-width: 100%; }
 /* Logo white while over hero; original color when past hero */
 .nav .brand-logo { filter: brightness(0) invert(1); }
 .nav.past-hero .brand-logo { filter: none; }
-.foot .brand-logo { filter: brightness(0) invert(1); height: 32px; }
+.foot .brand-logo { filter: brightness(0) invert(1); height: 44px; width: auto; }
+.foot .foot-brand { margin-bottom: 18px; }
 .brand-mark {
   width: 28px; height: 28px; border: 1.5px solid var(--ink);
   border-radius: 4px; position: relative; transform: rotate(45deg);
@@ -413,7 +414,10 @@ img { display: block; max-width: 100%; }
   position: relative; overflow: hidden;
   border-radius: var(--radius-md);
   background: var(--bg-soft);
+  cursor: zoom-in;
 }
+.eco-collage .ec img { transition: transform .7s var(--e-out); }
+.eco-collage .ec:hover img { transform: scale(1.04); }
 .eco-collage .ec img { width:100%; height:100%; object-fit: cover; }
 .eco-collage .ec .tag {
   position: absolute; top: 12px; left: 12px;
@@ -472,6 +476,12 @@ img { display: block; max-width: 100%; }
   border-radius: var(--radius-md); overflow: hidden;
 }
 .loc-map svg { width: 100%; height: 100%; display: block; }
+.loc-map iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+  filter: grayscale(.15) contrast(1.05);
+}
 .loc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
 .loc-list li {
   display: grid; grid-template-columns: 24px 1fr auto; gap: 14px;
@@ -584,7 +594,7 @@ img { display: block; max-width: 100%; }
 
 /* ============== TIMELINE (Payment plan) ============== */
 .timeline {
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid; grid-template-columns: repeat(2, 1fr);
   gap: clamp(16px, 2vw, 32px);
   margin-bottom: 32px;
 }
@@ -878,6 +888,90 @@ img { display: block; max-width: 100%; }
   .fab { padding: 14px; }
 }
 
+/* ============== LEGAL MODALS ============== */
+.modal {
+  position: fixed; inset: 0; z-index: 110;
+  background: rgba(20,22,26,.7);
+  backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center;
+  padding: clamp(16px, 3vw, 48px);
+}
+.modal.open { display: flex; }
+.modal-panel {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  max-width: 920px; width: 100%;
+  max-height: 86vh;
+  display: flex; flex-direction: column;
+  box-shadow: 0 40px 80px -30px rgba(0,0,0,.5);
+}
+.modal-head {
+  position: relative;
+  padding: clamp(20px, 2vw, 28px) clamp(24px, 3vw, 40px);
+  border-bottom: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;
+}
+.modal-head h2 {
+  font-family: var(--f-display); font-weight: 400;
+  font-size: clamp(20px, 2vw, 28px);
+  letter-spacing: -0.01em; line-height: 1.2;
+  margin: 0; color: var(--ink);
+}
+.modal-head .modal-sub {
+  margin-top: 4px;
+  font-family: var(--f-mono); font-size: var(--t-xs);
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted);
+}
+.modal-close {
+  flex: 0 0 36px; width: 36px; height: 36px;
+  background: transparent; border: 1px solid var(--ink); border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; color: var(--ink);
+  transition: background .2s var(--e-out), color .2s var(--e-out);
+}
+.modal-close:hover { background: var(--ink); color: var(--bg); }
+.modal-body {
+  overflow-y: auto; overflow-x: hidden;
+  padding: clamp(20px, 2.5vw, 36px) clamp(24px, 3vw, 40px);
+  scrollbar-width: thin;
+}
+.modal-body::-webkit-scrollbar { width: 8px; }
+.modal-body::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 999px; }
+.modal-body p, .modal-body li { color: var(--ink-muted); font-size: var(--t-sm); line-height: 1.65; }
+.modal-body h3 {
+  font-family: var(--f-display); font-weight: 400;
+  font-size: clamp(18px, 1.6vw, 22px); letter-spacing: -0.01em;
+  color: var(--ink); margin: 28px 0 10px;
+}
+.modal-body h4 {
+  font-family: var(--f-mono); font-size: var(--t-xs);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink); margin: 20px 0 8px;
+}
+.modal-body ul, .modal-body ol { padding-left: 22px; margin: 10px 0 14px; }
+.modal-body li { margin-bottom: 6px; }
+.modal-body strong { color: var(--ink); }
+.modal-body hr { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
+.modal-body .meta {
+  font-family: var(--f-mono); font-size: var(--t-xs);
+  letter-spacing: .08em; color: var(--ink-muted);
+  padding-bottom: 16px; border-bottom: 1px solid var(--line);
+  margin-bottom: 22px;
+}
+.modal-body .meta strong { display: block; font-family: var(--f-sans); font-size: var(--t-sm); letter-spacing: 0; text-transform: none; color: var(--ink); margin-bottom: 4px; }
+.link-trigger {
+  display: block; color: var(--on-dark); text-decoration: none;
+  font-size: var(--t-sm); padding: 4px 0; text-align: left;
+  background: transparent; border: 0; cursor: pointer; font-family: inherit;
+  transition: color .2s var(--e-out);
+}
+.link-trigger:hover { color: var(--accent); }
+.link-disclaimer {
+  background: transparent; border: 0; padding: 0; cursor: pointer;
+  color: inherit; text-decoration: underline; font: inherit;
+}
+body.modal-open { overflow: hidden; }
+
 /* ============== LIGHTBOX ============== */
 .lightbox {
   position: fixed; inset: 0; z-index: 100;
@@ -946,7 +1040,7 @@ img { display: block; max-width: 100%; }
 <!-- ================= HERO ================= -->
 <header class="hero">
   <div class="hero-bg" aria-hidden="true">
-    <img src="img/indigo-mall-render-complejo-comercial-residencial-aereo.webp" alt="" loading="eager" />
+    <img src="img/vista-general-bodega-industrial.webp" alt="" loading="eager" />
   </div>
 
   <div class="hero-meta">
@@ -1032,15 +1126,15 @@ img { display: block; max-width: 100%; }
     </div>
     <div class="eco-collage reveal-right">
       <div class="ec ec-main">
-        <img src="img/indigo-mall-paseo-comercial-restaurantes-personas.webp" alt="Mall comercial con flujo peatonal" loading="lazy" />
+        <img src="img/fachada-frontal-bodega-industrial.webp" alt="Fachada frontal del complejo Índigo Mall" loading="lazy" />
         <span class="tag">01 — Comercio</span>
       </div>
       <div class="ec ec-a">
-        <img src="img/indigo-mall-render-aereo-townhouses-comercio-naturaleza.webp" alt="Ecosistema residencial Índigo Houses" loading="lazy" />
+        <img src="img/vista-lateral-1-bodega-industrial.webp" alt="Vista lateral del complejo industrial" loading="lazy" />
         <span class="tag">02 — Vivienda</span>
       </div>
       <div class="ec ec-b">
-        <img src="img/indigo-mall-zona-comercial-palmeras-render-dia.webp" alt="Paisajismo y zonas verdes" loading="lazy" />
+        <img src="img/camino-acceso-nave-sur.webp" alt="Camino de acceso a Nave Sur" loading="lazy" />
         <span class="tag">03 — Naturaleza</span>
       </div>
     </div>
@@ -1062,39 +1156,12 @@ img { display: block; max-width: 100%; }
   </div>
 
   <div class="location">
-    <div class="loc-map reveal-left" aria-hidden="true">
-      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
-        <rect width="400" height="500" fill="#EAE6DF"/>
-        <!-- Roads -->
-        <path d="M0 280 L400 220" stroke="#D9D4CB" stroke-width="3" fill="none"/>
-        <path d="M200 0 L160 500" stroke="#D9D4CB" stroke-width="2" fill="none"/>
-        <path d="M0 100 Q200 180 400 90" stroke="#D9D4CB" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
-        <path d="M40 500 Q120 320 220 250" stroke="#D9D4CB" stroke-width="2" fill="none"/>
-        <!-- Avenida Ferrocarril label -->
-        <text x="40" y="270" font-family="JetBrains Mono" font-size="9" fill="#9A968E" letter-spacing="1.5">AV. FERROCARRIL</text>
-        <!-- Site marker -->
-        <circle cx="190" cy="250" r="34" fill="#B85A1E" opacity="0.12"/>
-        <circle cx="190" cy="250" r="18" fill="#B85A1E" opacity="0.25"/>
-        <circle cx="190" cy="250" r="8" fill="#B85A1E"/>
-        <text x="190" y="305" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="14" fill="#1B1C1E">Índigo Mall</text>
-        <!-- POIs -->
-        <circle cx="195" cy="220" r="3" fill="#1B1C1E"/>
-        <text x="205" y="223" font-family="JetBrains Mono" font-size="8" fill="#5E5D58">Autopistas del Café</text>
-        <circle cx="240" cy="180" r="3" fill="#1B1C1E"/>
-        <text x="250" y="183" font-family="JetBrains Mono" font-size="8" fill="#5E5D58">Centro Dosquebradas</text>
-        <circle cx="100" cy="170" r="3" fill="#1B1C1E"/>
-        <text x="40" y="173" font-family="JetBrains Mono" font-size="8" fill="#5E5D58">CC El Progreso</text>
-        <circle cx="80" cy="380" r="3" fill="#1B1C1E"/>
-        <text x="92" y="383" font-family="JetBrains Mono" font-size="8" fill="#5E5D58">Pereira centro</text>
-        <circle cx="340" cy="420" r="3" fill="#1B1C1E"/>
-        <text x="270" y="423" font-family="JetBrains Mono" font-size="8" fill="#5E5D58">Aeropuerto Matecaña</text>
-        <!-- Compass -->
-        <g transform="translate(350,460)">
-          <circle r="14" fill="none" stroke="#9A968E" stroke-width="1"/>
-          <path d="M0 -10 L4 4 L0 0 L-4 4 Z" fill="#1B1C1E"/>
-          <text x="0" y="-16" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#5E5D58">N</text>
-        </g>
-      </svg>
+    <div class="loc-map reveal-left">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.5112750425974!2d-75.66120572417101!3d4.853621540311158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3881e35fd581a7%3A0x9528f5ddb25ab60!2zw41uZGlnbw!5e0!3m2!1ses!2sco!4v1781898694153!5m2!1ses!2sco"
+        width="600" height="450" style="border:0;"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación de Índigo Mall en Google Maps"></iframe>
     </div>
 
     <div class="reveal-right">
@@ -1139,7 +1206,7 @@ img { display: block; max-width: 100%; }
   </div>
 
   <div class="typo-panel active" data-panel="p1">
-    <div class="img-frame"><img src="img/indigo-mall-pasillo-interior-nave-sur.webp" alt="Pasillo interior de la Nave Sur primer piso" loading="lazy"></div>
+    <div class="img-frame"><img src="img/pasillo-interior-nave-sur.webp" alt="Pasillo interior de la Nave Sur primer piso" loading="lazy"></div>
     <div class="body">
       <h3>Nave Sur — Primer piso</h3>
       <p class="blurb">Locales con fachada abierta y acceso directo desde parqueaderos. Incluye la primera ancla confirmada del proyecto: Only Home.</p>
@@ -1155,7 +1222,7 @@ img { display: block; max-width: 100%; }
   </div>
 
   <div class="typo-panel" data-panel="p2">
-    <div class="img-frame"><img src="img/indigo-mall-escaleras-nave-sur.webp" alt="Escaleras y segundo piso de Nave Sur" loading="lazy"></div>
+    <div class="img-frame"><img src="img/escaleras-interiores-nave-sur.webp" alt="Escaleras interiores que conectan los dos pisos de Nave Sur" loading="lazy"></div>
     <div class="body">
       <h3>Nave Sur — Segundo piso</h3>
       <p class="blurb">Locales con acceso por escaleras eléctricas. Alta visibilidad sobre la avenida y acabados exclusivos.</p>
@@ -1171,7 +1238,7 @@ img { display: block; max-width: 100%; }
   </div>
 
   <div class="typo-panel" data-panel="norte">
-    <div class="img-frame"><img src="img/indigo-mall-vista-lateral-nave-norte.webp" alt="Nave Norte vista lateral con casas Índigo Houses al fondo" loading="lazy"></div>
+    <div class="img-frame"><img src="img/vista-lateral-nave-norte.webp" alt="Nave Norte vista lateral" loading="lazy"></div>
     <div class="body">
       <h3>Nave Norte — Comercio selecto y gastronómico</h3>
       <p class="blurb">8 locales en altura sencilla. Escala humana, elegancia y un ambiente orientado a productos selectos y experiencia gastronómica.</p>
@@ -1187,7 +1254,7 @@ img { display: block; max-width: 100%; }
   </div>
 
   <div class="typo-panel" data-panel="anclas">
-    <div class="img-frame"><img src="img/indigo-mall-tiendas-ancla-nave-sur.webp" alt="Render de las tiendas ancla en Nave Sur" loading="lazy"></div>
+    <div class="img-frame"><img src="img/anclas-bodega-nave-sur.webp" alt="Render de los locales ancla en Nave Sur" loading="lazy"></div>
     <div class="body">
       <h3>Anclas que <em style="font-style: italic; color: var(--accent);">sostienen el flujo</em></h3>
       <p class="blurb">Only Home es la primera ancla confirmada del proyecto. Otras anclas están en proceso de cierre, distribuidas estratégicamente entre ambas naves para atraer y sostener visitantes.</p>
@@ -1238,7 +1305,7 @@ img { display: block; max-width: 100%; }
   </div>
 
   <div class="invest-row reveal">
-    <div class="media"><img src="img/indigo-mall-pasillo-central-palmeras-locales-comerciales.webp" alt="Pasillo central con locales y flujo peatonal" loading="lazy"></div>
+    <div class="media"><img src="img/camino-acceso-nave-sur.webp" alt="Camino de acceso desde parqueadero hasta los locales" loading="lazy"></div>
     <div class="copy">
       <div class="num">01 — Formato que baja vacancia</div>
       <h3>Mall de paso: diseñado para que nadie pase de largo.</h3>
@@ -1247,7 +1314,7 @@ img { display: block; max-width: 100%; }
   </div>
 
   <div class="invest-row reverse reveal">
-    <div class="media"><img src="img/indigo-mall-bookstore-terraza-vista-montana-locales.webp" alt="Bookstore con terraza y vista a la montaña" loading="lazy"></div>
+    <div class="media"><img src="img/letrero-frontal-bodega-industrial.webp" alt="Letrero frontal del complejo Índigo Mall" loading="lazy"></div>
     <div class="copy">
       <div class="num">02 — Entrada en etapa favorable</div>
       <h3>El 76% ya se vendió. Esta es la última ventana.</h3>
@@ -1256,7 +1323,7 @@ img { display: block; max-width: 100%; }
   </div>
 
   <div class="invest-row reveal">
-    <div class="media"><img src="img/indigo-mall-render-aereo-completo-luz-dorada-atardecer.webp" alt="Vista aérea del ecosistema completo al atardecer" loading="lazy"></div>
+    <div class="media"><img src="img/vista-general-bodega-industrial.webp" alt="Vista general aérea del complejo Índigo" loading="lazy"></div>
     <div class="copy">
       <div class="num">03 — Ecosistema ya en ejecución</div>
       <h3>Esto no es un render. Es un ecosistema con tracción real.</h3>
@@ -1270,7 +1337,7 @@ img { display: block; max-width: 100%; }
   <div class="section-head">
     <div>
       <span class="eyebrow">06 — Financiación</span>
-      <h2 class="h2" style="margin-top:16px;">Estructura 20 · 60 · 20.<br>Separas hoy, pagas <em>durante obra.</em></h2>
+      <h2 class="h2" style="margin-top:16px;">Estructura 20/80.<br>Separas hoy, pagas <em>durante obra.</em></h2>
     </div>
     <div>
       <p class="lead muted">
@@ -1289,15 +1356,9 @@ img { display: block; max-width: 100%; }
     <div class="tl-step reveal">
       <span class="tl-dot">02</span>
       <span class="tl-label">Paso 2 · Ejecución</span>
-      <h4>60% progresivo</h4>
-      <p>El 60% se paga de forma progresiva durante la construcción del proyecto. Sin presión de cuota final.</p>
+      <h4>80% progresivo</h4>
+      <p>El 80% restante se paga de forma progresiva mientras avanza el proyecto — no como una cuota de vivienda. Sin presión de pago final.</p>
       <span class="tl-tag">Plan flexible</span>
-    </div>
-    <div class="tl-step reveal">
-      <span class="tl-dot">03</span>
-      <span class="tl-label">Paso 3 · Escrituras</span>
-      <h4>20% a escrituras</h4>
-      <p>Pagas el 20% restante al escriturar y recibes el local. Entrega proyectada: 2º semestre 2027. Adecuaciones y apertura en los meses siguientes.</p>
     </div>
   </div>
   <p class="tl-note">Estructura de pago propuesta. Estamos dispuestos a escuchar tu propuesta de pago según tu plan de inversión.</p>
@@ -1307,13 +1368,13 @@ img { display: block; max-width: 100%; }
 <section class="bto" id="bto">
   <div class="bto-grid">
     <div class="bto-portrait reveal-left">
-      <img src="img/indigo-mall-tienda-only-home-vista-parqueadero.webp" alt="Tienda Only Home, ancla del proyecto" loading="lazy" />
+      <img src="img/letrero-lateral-sur-bodega.webp" alt="Letrero lateral del complejo Índigo Mall" loading="lazy" />
     </div>
     <div class="reveal-right">
       <span class="eyebrow">07 — Quién construye</span>
       <h2 class="h2">Experiencia construyendo<br>en el <em>Eje Cafetero.</em></h2>
       <p class="lead">
-        BTO Constructora nace de la unión de Only Home — pionero de la industria moblera con más de 30 tiendas en Colombia — y el arquitecto Juan Carlos Jaramillo, socio y fundador de PROA, constructora con más de 30 años de proyectos en el Eje Cafetero. Es experiencia consolidada decidida a construir diferente.
+        BTO Constructora nace de la unión de Only Home —con más de 30 tiendas en Colombia— y el arquitecto Juan Carlos Jaramillo, socio fundador de PROA Constructora, con más de 30 años de experiencia en el Eje Cafetero. Una misma forma de entender la arquitectura: bien hecha, pensada para ser vivida plenamente.
       </p>
 
       <div class="bto-quote">
@@ -1321,15 +1382,6 @@ img { display: block; max-width: 100%; }
         <span class="attr">Juan Carlos Jaramillo · Arquitecto · CEO BTO</span>
       </div>
 
-      <div class="bto-allies">
-        <span class="label">Equipo aliado</span>
-        <span>BTO Constructora</span>
-        <span>Only Home</span>
-        <span>Dados Dawson</span>
-        <span>Noddo</span>
-        <span>1804 Abogadas</span>
-        <span>Sysmico</span>
-      </div>
     </div>
   </div>
 </section>
@@ -1348,29 +1400,26 @@ img { display: block; max-width: 100%; }
 
   <div class="gallery-wrap">
     <div class="gallery" id="gallery">
-      <div class="g-item" data-i="0"><img src="img/indigo-mall-pasillo-central-palmeras-locales-comerciales.webp" alt="Pasillo central con palmeras y locales comerciales" loading="lazy"></div>
-      <div class="g-item" data-i="1"><img src="img/indigo-mall-bookstore-terraza-vista-montana-locales.webp" alt="Bookstore con terraza y vista a la montaña" loading="lazy"></div>
-      <div class="g-item" data-i="2"><img src="img/indigo-mall-the-bakery-cookies-coffee-local-exterior.webp" alt="The Bakery — local exterior de cookies y coffee" loading="lazy"></div>
-      <div class="g-item" data-i="3"><img src="img/indigo-mall-paloma-good-wine-tienda-vinos-nocturna.webp" alt="Paloma Good Wine — tienda de vinos en vista nocturna" loading="lazy"></div>
-      <div class="g-item" data-i="4"><img src="img/indigo-mall-nalu-pilates-club-estudio-exterior.webp" alt="Nalu Pilates Club — estudio exterior" loading="lazy"></div>
-      <div class="g-item" data-i="5"><img src="img/indigo-mall-render-complejo-comercial-residencial-aereo.webp" alt="Vista aérea del complejo comercial y residencial" loading="lazy"></div>
-      <div class="g-item" data-i="6"><img src="img/indigo-mall-render-aereo-atardecer-complejo-comercial.webp" alt="Render aéreo al atardecer" loading="lazy"></div>
-      <div class="g-item" data-i="7"><img src="img/indigo-mall-vista-aerea-render-exterior-montanas.webp" alt="Vista aérea con paisaje de montañas" loading="lazy"></div>
-      <div class="g-item" data-i="8"><img src="img/indigo-mall-entrada-principal-parqueadero-logo.webp" alt="Entrada principal con parqueadero" loading="lazy"></div>
-      <div class="g-item" data-i="9"><img src="img/indigo-mall-fachada-only-home-palmeras-exterior.webp" alt="Fachada Only Home con palmeras" loading="lazy"></div>
-      <div class="g-item" data-i="10"><img src="img/indigo-mall-estacionamiento-fachada-only-home-sunset.webp" alt="Estacionamiento y fachada Only Home al atardecer" loading="lazy"></div>
-      <div class="g-item" data-i="11"><img src="img/indigo-mall-local-only-home-fachada-frontal-nocturna.webp" alt="Fachada Only Home en vista nocturna" loading="lazy"></div>
-      <div class="g-item" data-i="12"><img src="img/indigo-mall-lateral-only-home-fachada.webp" alt="Lateral de fachada Only Home" loading="lazy"></div>
-      <div class="g-item" data-i="13"><img src="img/indigo-mall-vista-lateral-fachada-exterior.webp" alt="Vista lateral exterior" loading="lazy"></div>
-      <div class="g-item" data-i="14"><img src="img/indigo-mall-terraza-restaurante-mesas-ambiente-lifestyle.webp" alt="Terraza de restaurante" loading="lazy"></div>
-      <div class="g-item" data-i="15"><img src="img/indigo-mall-zona-gastronomica-restaurantes-terraza-exterior.webp" alt="Zona gastronómica exterior" loading="lazy"></div>
-      <div class="g-item" data-i="16"><img src="img/indigo-mall-paseo-comercial-restaurantes-personas.webp" alt="Paseo comercial con personas" loading="lazy"></div>
-      <div class="g-item" data-i="17"><img src="img/indigo-mall-pasillo-interior-nave-sur.webp" alt="Pasillo interior Nave Sur" loading="lazy"></div>
-      <div class="g-item" data-i="18"><img src="img/indigo-mall-escaleras-nave-sur.webp" alt="Escaleras Nave Sur" loading="lazy"></div>
-      <div class="g-item" data-i="19"><img src="img/indigo-mall-vista-aerea-torres-residenciales-zona-comercial.webp" alt="Vista aérea torres residenciales y zona comercial" loading="lazy"></div>
+      <div class="g-item" data-i="0"><img src="img/vista-general-bodega-industrial.webp" alt="Vista general aérea del complejo" loading="lazy"></div>
+      <div class="g-item" data-i="1"><img src="img/fachada-frontal-bodega-industrial.webp" alt="Fachada frontal del complejo" loading="lazy"></div>
+      <div class="g-item" data-i="2"><img src="img/letrero-frontal-bodega-industrial.webp" alt="Letrero frontal" loading="lazy"></div>
+      <div class="g-item" data-i="3"><img src="img/letrero-lateral-sur-bodega.webp" alt="Letrero lateral sur" loading="lazy"></div>
+      <div class="g-item" data-i="4"><img src="img/vista-lateral-bodega-industrial.webp" alt="Vista lateral del complejo" loading="lazy"></div>
+      <div class="g-item" data-i="5"><img src="img/vista-lateral-1-bodega-industrial.webp" alt="Vista lateral 1" loading="lazy"></div>
+      <div class="g-item" data-i="6"><img src="img/vista-lateral-2-bodega-industrial.webp" alt="Vista lateral 2" loading="lazy"></div>
+      <div class="g-item" data-i="7"><img src="img/vista-lateral-nave-sur.webp" alt="Vista lateral Nave Sur" loading="lazy"></div>
+      <div class="g-item" data-i="8"><img src="img/vista-lateral-3-nave-sur.webp" alt="Vista lateral 3 Nave Sur" loading="lazy"></div>
+      <div class="g-item" data-i="9"><img src="img/vista-lateral-nave-norte.webp" alt="Vista lateral Nave Norte" loading="lazy"></div>
+      <div class="g-item" data-i="10"><img src="img/camino-acceso-nave-sur.webp" alt="Camino de acceso Nave Sur" loading="lazy"></div>
+      <div class="g-item" data-i="11"><img src="img/pasillo-interior-nave-sur.webp" alt="Pasillo interior Nave Sur" loading="lazy"></div>
+      <div class="g-item" data-i="12"><img src="img/pasillo-interior-nave-norte.webp" alt="Pasillo interior Nave Norte" loading="lazy"></div>
+      <div class="g-item" data-i="13"><img src="img/escaleras-interiores-nave-sur.webp" alt="Escaleras interiores Nave Sur" loading="lazy"></div>
+      <div class="g-item" data-i="14"><img src="img/parqueaderos-nave-sur-bodega.webp" alt="Parqueaderos Nave Sur" loading="lazy"></div>
+      <div class="g-item" data-i="15"><img src="img/parqueaderos-nave-norte-bodega.webp" alt="Parqueaderos Nave Norte" loading="lazy"></div>
+      <div class="g-item" data-i="16"><img src="img/anclas-bodega-nave-sur.webp" alt="Locales ancla Nave Sur" loading="lazy"></div>
     </div>
     <div class="gallery-counter">
-      <span id="galleryIndex">01 / 20</span>
+      <span id="galleryIndex">01 / 17</span>
       <span>← Desliza →</span>
     </div>
   </div>
@@ -1399,7 +1448,7 @@ img { display: block; max-width: 100%; }
     </div>
     <div class="faq-item">
       <button class="faq-q" aria-expanded="false">¿Cuál es la forma de pago?<span class="ico" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
-      <div class="faq-a"><div><p>El esquema es 20% de separación al firmar, 60% progresivo durante la construcción del proyecto y 20% a escrituras al recibir el local. Estamos dispuestos a escuchar tu propuesta de pago según tu plan de inversión.</p></div></div>
+      <div class="faq-a"><div><p>El esquema es 20% de separación al firmar y 80% progresivo durante la ejecución del proyecto — se paga mientras avanza la obra, no como una cuota de vivienda. Esta es una estructura de pago propuesta: estamos dispuestos a escuchar tu propuesta según tu plan de inversión.</p></div></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" aria-expanded="false">¿Para cuándo entregan?<span class="ico" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
@@ -1435,7 +1484,7 @@ img { display: block; max-width: 100%; }
 <!-- ================= FINAL CTA ================= -->
 <section class="final-cta" id="contacto">
   <div class="bg" aria-hidden="true">
-    <img src="img/indigo-mall-render-aereo-atardecer-complejo-comercial.webp" alt="" loading="lazy" />
+    <img src="img/vista-general-bodega-industrial.webp" alt="" loading="lazy" />
   </div>
   <div class="inner">
     <div>
@@ -1488,7 +1537,7 @@ img { display: block; max-width: 100%; }
           Quiero que me contacten
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
-        <p class="form-disclaimer">Al enviar aceptas que un asesor comercial de BTO te contacte. Tus datos están protegidos bajo nuestra política de tratamiento de datos.</p>
+        <p class="form-disclaimer">Al enviar aceptas que un asesor comercial de BTO te contacte. Tus datos están protegidos bajo nuestra <button type="button" class="link-disclaimer" data-modal="modalPolitica">política de tratamiento de datos</button>.</p>
       </form>
     </div>
   </div>
@@ -1497,11 +1546,8 @@ img { display: block; max-width: 100%; }
 <!-- ================= FOOTER ================= -->
 <footer class="foot">
   <div class="brandblock">
-    <a href="#" class="brand" aria-label="Índigo Mall — Inicio">
-      <img src="img/LOGOINDIGOMALL.png" alt="Índigo Mall" class="brand-logo" />
-      <span class="brand-txt">
-        <span class="brand-sub">BTO Constructora</span>
-      </span>
+    <a href="#" class="brand foot-brand" aria-label="BTO Constructora — Inicio">
+      <img src="img/BTO.png" alt="BTO Constructora" class="brand-logo" />
     </a>
     <p>Arquitectura del Eje Cafetero. Experiencia construyendo proyectos que transforman ciudades.</p>
     <div class="address">
@@ -1520,8 +1566,8 @@ img { display: block; max-width: 100%; }
   </div>
   <div>
     <h4>Legal</h4>
-    <span style="display:block; color: rgba(239,235,228,.65); font-size: var(--t-sm); padding: 4px 0;">Política de tratamiento de datos · próximamente</span>
-    <span style="display:block; color: rgba(239,235,228,.65); font-size: var(--t-sm); padding: 4px 0;">Términos y condiciones · próximamente</span>
+    <button class="link-trigger" data-modal="modalPolitica">Política de tratamiento de datos</button>
+    <button class="link-trigger" data-modal="modalClausula">Autorización de tratamiento de datos</button>
     <span style="display:block; color: rgba(239,235,228,.5); font-family: var(--f-mono); font-size: var(--t-xs); letter-spacing: .06em; padding: 8px 0 0;">Resolución Nº 66170-1-25-0258-IC</span>
   </div>
 
@@ -1548,6 +1594,305 @@ img { display: block; max-width: 100%; }
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   <span class="lbl">Quiero invertir</span>
 </a>
+
+<!-- ================= LEGAL MODAL — POLÍTICA ================= -->
+<div class="modal" id="modalPolitica" role="dialog" aria-modal="true" aria-labelledby="modalPoliticaTitle" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div>
+        <h2 id="modalPoliticaTitle">Política de Tratamiento de Datos Personales</h2>
+        <div class="modal-sub">BTO Constructora S.A.S. — NIT 901.844.030-1</div>
+      </div>
+      <button class="modal-close" aria-label="Cerrar" data-close>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="meta"><strong>BTO CONSTRUCTORA S.A.S. — NIT 901.844.030-1</strong>Sistema Integral de Gestión de Datos Personales — Código 001</div>
+      <p>BTO CONSTRUCTORA S.A.S., en calidad de responsable del tratamiento de datos personales, adopta esta Política con el propósito de garantizar el adecuado manejo de los datos recolectados, almacenados, usados, circulados, actualizados, transmitidos o suprimidos en desarrollo de sus actividades empresariales, en cumplimiento de la Ley Estatutaria 1581 de 2012, el Decreto Único Reglamentario 1074 de 2015 y las instrucciones de la Superintendencia de Industria y Comercio.</p>
+      <p>El derecho fundamental al hábeas data faculta a toda persona para conocer, actualizar, rectificar y, cuando sea procedente, solicitar la supresión de la información personal que repose en bases de datos administradas por entidades públicas o privadas.</p>
+
+      <h3>1. Identificación del responsable del tratamiento</h3>
+      <ul>
+        <li><strong>Razón social:</strong> BTO CONSTRUCTORA S.A.S.</li>
+        <li><strong>NIT:</strong> 901.844.030-1</li>
+        <li><strong>Domicilio principal:</strong> Armenia, Quindío.</li>
+        <li><strong>Representante legal:</strong> Sebastián Botero Bueno.</li>
+        <li><strong>Cargo:</strong> Gerente.</li>
+        <li><strong>Correo para protección de datos:</strong> administrativo@btoconstructora.com</li>
+        <li><strong>Teléfono de contacto:</strong> 316 520 2452</li>
+        <li><strong>Dirección de notificaciones:</strong> contabilidad@btoconstructora.com</li>
+      </ul>
+      <p>Los titulares podrán ejercer sus derechos de consulta, actualización, corrección, supresión y revocatoria de la autorización a través de los canales de atención que la sociedad disponga.</p>
+
+      <h3>2. Objeto</h3>
+      <p>Esta Política establece los lineamientos, principios, procedimientos y mecanismos aplicables al tratamiento de la información personal administrada por BTO CONSTRUCTORA S.A.S., garantizando el ejercicio del derecho fundamental al hábeas data. Regula las condiciones bajo las cuales la sociedad realiza recolección, almacenamiento, conservación, organización, actualización, uso, circulación, transmisión, transferencia, consulta y supresión de datos, y define las finalidades, los derechos de los titulares, los deberes de la compañía, los canales de atención y las condiciones de vigencia de las bases de datos.</p>
+
+      <h3>3. Definiciones</h3>
+      <ul>
+        <li><strong>Autorización:</strong> Manifestación de voluntad libre, previa, expresa e informada mediante la cual el titular autoriza el tratamiento de su información conforme a las finalidades informadas.</li>
+        <li><strong>Base de datos:</strong> Conjunto organizado de datos personales bajo administración de la compañía, sin importar el medio en que se almacene.</li>
+        <li><strong>Dato personal:</strong> Cualquier información que identifique o permita identificar, directa o indirectamente, a una persona natural.</li>
+        <li><strong>Dato privado:</strong> Información cuyo acceso está restringido a su titular y cuya divulgación requiere autorización o habilitación legal.</li>
+        <li><strong>Dato público:</strong> Información que por ley o por su naturaleza puede ser conocida por cualquier persona (estado civil, profesión u oficio, calidad de comerciante, etc.).</li>
+        <li><strong>Dato semiprivado:</strong> Información que no es íntima, reservada ni pública, y cuyo conocimiento interesa al titular y a un grupo o sector específico.</li>
+        <li><strong>Dato sensible:</strong> Información que afecta la intimidad o cuyo uso indebido puede generar discriminación (origen racial o étnico, orientación política, convicciones religiosas o filosóficas, afiliación sindical, salud, vida sexual y datos biométricos).</li>
+        <li><strong>Dato biométrico:</strong> Información obtenida de características físicas, fisiológicas o comportamentales que permiten identificar o autenticar a una persona (huellas, reconocimiento facial, voz, iris, firma biométrica, etc.).</li>
+        <li><strong>Encargado del tratamiento:</strong> Persona natural o jurídica que trata datos por cuenta de BTO CONSTRUCTORA S.A.S.</li>
+        <li><strong>Responsable del tratamiento:</strong> Persona que determina las finalidades y medios del tratamiento; en esta política, BTO CONSTRUCTORA S.A.S.</li>
+        <li><strong>Titular:</strong> Persona natural cuyos datos son objeto de tratamiento.</li>
+        <li><strong>Tratamiento:</strong> Cualquier operación sobre datos personales (recolección, almacenamiento, conservación, organización, actualización, consulta, uso, circulación, transmisión, transferencia o supresión).</li>
+        <li><strong>Aliados estratégicos:</strong> Personas con las cuales la compañía mantiene relaciones comerciales, contractuales, operativas o de colaboración.</li>
+        <li><strong>Consulta:</strong> Solicitud para conocer la información personal que repose en las bases de datos de la compañía.</li>
+        <li><strong>Reclamo:</strong> Solicitud de corrección, actualización, supresión o atención de presuntos incumplimientos de la normativa.</li>
+        <li><strong>Transferencia de datos:</strong> Envío de datos a un tercero que actúa como responsable, dentro o fuera del país.</li>
+        <li><strong>Transmisión de datos:</strong> Tratamiento realizado por un tercero en calidad de encargado, por cuenta y bajo instrucciones de la compañía.</li>
+        <li><strong>Aviso de privacidad:</strong> Comunicación que informa al titular sobre la existencia de la política, las finalidades y los mecanismos para ejercer sus derechos.</li>
+      </ul>
+
+      <h3>4. Finalidades y actividades de tratamiento</h3>
+      <p>Las finalidades aplican a clientes, potenciales clientes, compradores, propietarios, proveedores, contratistas, trabajadores, aspirantes, visitantes y demás personas que mantengan o hayan mantenido relación con la compañía.</p>
+
+      <h4>4.1. Finalidades generales aplicables a todas las bases de datos</h4>
+      <ol>
+        <li>Establecer canales de comunicación para el envío de información institucional, comercial, contractual, técnica, administrativa o de servicios.</li>
+        <li>Cumplir obligaciones legales, regulatorias, contractuales y comerciales.</li>
+        <li>Gestionar consultas, solicitudes, peticiones, sugerencias, quejas y reclamos.</li>
+        <li>Conservar información en archivos físicos o electrónicos cuando exista obligación legal, contractual o judicial.</li>
+        <li>Realizar validaciones y consultas en listas restrictivas y bases de datos relacionadas con prevención de lavado de activos, financiación del terrorismo, corrupción, soborno transnacional, inhabilidades, antecedentes y gestión del riesgo.</li>
+        <li>Implementar mecanismos de control, seguridad y protección de personas, bienes, instalaciones, activos e información.</li>
+        <li>Captar y utilizar imágenes y grabaciones de videovigilancia en oficinas, salas de ventas, proyectos y zonas comunes con fines de seguridad, control de acceso y como elemento probatorio.</li>
+        <li>Desarrollar actividades de mercadeo, publicidad, promoción comercial, análisis estadísticos, estudios de mercado, fidelización y divulgación de proyectos y campañas.</li>
+        <li>Compartir información con proveedores, contratistas, entidades fiduciarias, financieras, aseguradoras, aliados comerciales y asesores externos cuando sea necesario.</li>
+        <li>Transmitir o transferir datos a terceros autorizados, dentro o fuera del país, conforme a la normativa vigente.</li>
+      </ol>
+
+      <h4>4.2. Base de datos de aspirantes, trabajadores, aprendices y ex trabajadores</h4>
+      <ol>
+        <li>Procesos de reclutamiento, selección, verificación de referencias, estudios de seguridad y evaluación de candidatos.</li>
+        <li>Entrevistas, pruebas psicotécnicas y de conocimiento, evaluaciones técnicas y visitas domiciliarias.</li>
+        <li>Gestión de la vinculación, ejecución, administración y terminación de contratos de trabajo.</li>
+        <li>Administración de nómina, pagos, prestaciones sociales, afiliaciones y aportes al Sistema de Seguridad Social y cajas de compensación.</li>
+        <li>Programas de bienestar, capacitación, formación, evaluación de desempeño y desarrollo profesional.</li>
+        <li>Gestión del Sistema de Seguridad y Salud en el Trabajo (SG-SST), exámenes ocupacionales, investigación de incidentes y seguimiento a la salud.</li>
+        <li>Registros históricos laborales, contractuales, disciplinarios y de seguridad social.</li>
+        <li>Compartir información con entidades de seguridad social, fondos de pensiones, EPS, ARL, cajas de compensación, operadores de nómina y autoridades.</li>
+        <li>Captar y utilizar material audiovisual de actividades corporativas, capacitaciones y jornadas de bienestar.</li>
+        <li>Uso de imágenes con fines publicitarios, promocionales o institucionales, solo con autorización previa, expresa e informada.</li>
+        <li>Mecanismos de control de acceso, monitoreo y videovigilancia.</li>
+        <li>Atención de requerimientos de autoridades administrativas, judiciales o de control.</li>
+      </ol>
+
+      <h4>4.3. Base de datos de proveedores, contratistas y aliados comerciales</h4>
+      <ol>
+        <li>Identificar, contactar, evaluar, seleccionar y vincular proveedores y contratistas.</li>
+        <li>Gestionar cotizaciones, propuestas, ofertas de servicios, suministros y materiales.</li>
+        <li>Verificar experiencia y capacidad técnica, financiera, jurídica y operativa.</li>
+        <li>Administrar contratos, órdenes de compra y de servicio.</li>
+        <li>Seguimiento al cumplimiento de obligaciones contractuales, técnicas, financieras, laborales, tributarias y de seguridad social.</li>
+        <li>Gestionar facturación, causación, pagos, retenciones y demás actuaciones contables.</li>
+        <li>Evaluar calidad, oportunidad y cumplimiento de bienes y servicios.</li>
+        <li>Análisis de riesgos jurídicos, financieros, reputacionales, operativos y de cumplimiento.</li>
+        <li>Consultas en listas restrictivas y verificaciones de cumplimiento normativo.</li>
+        <li>Cumplir obligaciones legales, contractuales, contables, tributarias y regulatorias.</li>
+        <li>Compartir información con entidades fiduciarias, financieras, aseguradoras, interventorías, auditorías, asesores y autoridades.</li>
+        <li>Conservar registros documentales, contractuales, financieros y administrativos por los términos legales.</li>
+      </ol>
+
+      <h4>4.4. Base de datos de clientes, potenciales clientes y compradores</h4>
+      <ol>
+        <li>Contactar para suministrar información sobre proyectos, desarrollos urbanísticos, campañas, promociones, beneficios y eventos.</li>
+        <li>Enviar información institucional, comercial, técnica y publicitaria.</li>
+        <li>Atender solicitudes de información, cotizaciones, reservas, manifestaciones de interés y simulaciones financieras.</li>
+        <li>Realizar estudios comerciales, análisis de mercado, segmentación y encuestas de satisfacción.</li>
+        <li>Analizar necesidades, preferencias y perfil para ofrecer alternativas inmobiliarias acordes.</li>
+        <li>Gestionar negocios jurídicos: reservas, separaciones, promesas de compraventa, contratos, cesiones, escrituras y trámites notariales y registrales.</li>
+        <li>Gestionar vinculación con patrimonios autónomos, fiducias inmobiliarias, entidades financieras y aseguradoras.</li>
+        <li>Trámites de estudios de crédito, verificación de capacidad financiera y validación documental.</li>
+        <li>Administrar escrituración, entrega de inmuebles, garantías legales y postventa.</li>
+        <li>Invitar a lanzamientos, eventos comerciales y ferias inmobiliarias.</li>
+        <li>Captar imágenes y registros audiovisuales en eventos; el uso publicitario requiere autorización previa, expresa e informada cuando sea legalmente exigible.</li>
+        <li>Consultas y reportes ante operadores de información financiera y centrales de riesgo, con autorización o habilitación legal.</li>
+        <li>Evaluar riesgos comerciales, financieros, jurídicos, reputacionales y de cumplimiento.</li>
+        <li>Compartir información con entidades fiduciarias, financieras, notarías, oficinas de registro, aseguradoras y autoridades.</li>
+        <li>Conservar información y documentación durante los términos exigidos por la ley.</li>
+      </ol>
+
+      <h3>5. Tratamiento de datos personales sensibles</h3>
+      <p>Los datos sensibles gozan de protección especial. La compañía adoptará medidas para garantizar su custodia, confidencialidad y tratamiento conforme a la Ley 1581 de 2012. Podrá tratar datos sensibles cuando sea necesario para obligaciones legales, contractuales o de seguridad, especialmente en gestión del talento humano, SG-SST, atención de emergencias y control de acceso.</p>
+      <p>En todos los casos en que se solicite autorización para tratar datos sensibles, el titular será informado de:</p>
+      <ul>
+        <li>La finalidad específica de la recolección y uso.</li>
+        <li>El carácter facultativo de responder preguntas sobre datos sensibles.</li>
+        <li>Los derechos que le asisten.</li>
+        <li>Los mecanismos para ejercerlos.</li>
+      </ul>
+
+      <h3>6. Tratamiento de datos de niños, niñas y adolescentes</h3>
+      <p>Conforme al artículo 7 de la Ley 1581 de 2012 y la Sentencia C-748 de 2011, la compañía reconoce la especial protección de los datos de menores y, como regla general, evitará su recolección salvo cuando sea necesario, legalmente permitido y responda a una finalidad legítima. Reglas aplicables:</p>
+      <ol>
+        <li>El tratamiento responderá al interés superior del menor.</li>
+        <li>Se garantizará el respeto y protección de sus derechos fundamentales, que prevalecen sobre los demás.</li>
+        <li>Se obtendrá autorización previa, expresa e informada del representante legal cuando sea requerida.</li>
+        <li>Se tendrá en cuenta la opinión del menor según su madurez y capacidad.</li>
+        <li>Los datos se usarán solo para las finalidades que motivaron su obtención.</li>
+        <li>Se implementarán medidas técnicas, administrativas y humanas para garantizar seguridad y confidencialidad.</li>
+      </ol>
+
+      <h3>7. Transferencia y transmisión de datos personales</h3>
+      <p>La compañía podrá transferir o transmitir datos a terceros cuando sea necesario para el cumplimiento de obligaciones legales, contractuales o comerciales, o cuando exista autorización del titular. Los datos podrán compartirse con entidades financieras, fiduciarias, aseguradoras, notarías, oficinas de registro, proveedores tecnológicos, asesores externos, contratistas y autoridades.</p>
+      <p>Cuando transmita datos a un encargado, adoptará medidas contractuales, técnicas y administrativas para garantizar un tratamiento conforme a sus instrucciones. Las transferencias nacionales o internacionales se efectuarán observando los requisitos de la Ley 1581 de 2012 y el Decreto 1074 de 2015, garantizando niveles adecuados de protección.</p>
+
+      <h3>8. Obligaciones de BTO Constructora S.A.S. como responsable</h3>
+      <ol>
+        <li>Garantizar el ejercicio pleno y efectivo de los derechos de los titulares.</li>
+        <li>Obtener autorización previa, expresa e informada cuando se requiera y conservar sus soportes.</li>
+        <li>Informar de manera clara, suficiente y oportuna las finalidades y los derechos de los titulares.</li>
+        <li>Informar el carácter facultativo de la respuesta en datos sensibles o de menores.</li>
+        <li>Implementar mecanismos para conocer, actualizar, rectificar, suprimir datos y revocar la autorización.</li>
+        <li>Adoptar medidas técnicas, administrativas, humanas y organizacionales razonables de protección.</li>
+        <li>Mantener la información bajo condiciones de seguridad, integridad, disponibilidad y confidencialidad.</li>
+        <li>Velar porque la información sea veraz, completa, exacta, actualizada y comprensible.</li>
+        <li>Actualizar, corregir o rectificar oportunamente los datos.</li>
+        <li>Suministrar únicamente información cuyo tratamiento esté autorizado o permitido.</li>
+        <li>Exigir a los encargados el cumplimiento de las condiciones de seguridad y confidencialidad.</li>
+        <li>Atender oportunamente consultas, solicitudes, peticiones, quejas y reclamos.</li>
+        <li>Implementar y mantener procedimientos internos de cumplimiento normativo.</li>
+        <li>Informar a los encargados cuando la información esté en trámite de actualización, rectificación o supresión.</li>
+        <li>Suministrar a los titulares información sobre el tratamiento cuando lo soliciten.</li>
+        <li>Reportar a la SIC los incidentes de seguridad cuando exista obligación legal.</li>
+        <li>Cumplir las instrucciones y requerimientos de la SIC y demás autoridades competentes.</li>
+        <li>Designar canales y mecanismos para la atención de consultas y reclamos.</li>
+        <li>Garantizar que toda transferencia o transmisión cumpla los requisitos legales.</li>
+        <li>Capacitar y sensibilizar periódicamente a quienes intervengan en el tratamiento.</li>
+      </ol>
+
+      <h3>9. Derechos de los titulares de la información</h3>
+      <ol>
+        <li>Conocer, acceder, consultar, actualizar y rectificar sus datos cuando sean parciales, inexactos, incompletos, desactualizados o no autorizados.</li>
+        <li>Solicitar prueba de la autorización otorgada, salvo excepciones legales.</li>
+        <li>Ser informados, previa solicitud, sobre el uso dado a sus datos.</li>
+        <li>Presentar consultas, peticiones, quejas o reclamos y obtener respuesta en los términos legales.</li>
+        <li>Solicitar actualización, corrección, modificación o rectificación.</li>
+        <li>Solicitar la supresión de sus datos cuando el tratamiento no respete los principios y garantías, salvo deber legal o contractual.</li>
+        <li>Revocar la autorización cuando sea procedente y no exista obligación de conservación.</li>
+        <li>Acceder gratuitamente a sus datos objeto de tratamiento.</li>
+        <li>Presentar quejas ante la SIC una vez agotado el trámite ante la compañía.</li>
+        <li>Abstenerse de responder preguntas sobre datos sensibles o de menores (carácter facultativo).</li>
+        <li>Ejercer cualquier otro derecho reconocido por la Constitución y la ley.</li>
+      </ol>
+
+      <h3>10. Aspectos generales para el ejercicio de los derechos</h3>
+      <p>Las solicitudes deberán contener como mínimo:</p>
+      <ol>
+        <li>Nombre completo del titular y, cuando corresponda, de su representante.</li>
+        <li>Número de identificación del titular.</li>
+        <li>Datos de contacto (dirección física o electrónica y teléfono).</li>
+        <li>Descripción clara, precisa y detallada de los hechos.</li>
+        <li>Indicación expresa del derecho que se desea ejercer.</li>
+        <li>Documentos o soportes necesarios.</li>
+        <li>Firma del solicitante cuando resulte procedente.</li>
+      </ol>
+      <p>Si la solicitud está incompleta, la compañía requerirá al interesado dentro de los <strong>5 días hábiles</strong> siguientes para subsanarla. Si transcurridos <strong>2 meses</strong> desde el requerimiento no se aporta la información, se entenderá desistida. Las solicitudes recibidas por una dependencia no competente se trasladarán al área correspondiente dentro de los <strong>2 días hábiles</strong> siguientes.</p>
+
+      <h3>11. Procedimiento para la atención de consultas</h3>
+      <p>Las consultas se atenderán en un término máximo de <strong>10 días hábiles</strong> contados a partir del día hábil siguiente a su recepción. Cuando no sea posible atenderlas en ese plazo, se informará al interesado antes del vencimiento, con respuesta definitiva que no superará los <strong>5 días hábiles</strong> siguientes al término inicial.</p>
+
+      <h3>12. Procedimiento para la atención de reclamos</h3>
+      <p>Recibido el reclamo completo, se incluirá en la base de datos la anotación "Reclamo en trámite" dentro de los <strong>5 días hábiles</strong> siguientes, la cual permanecerá hasta su resolución. El término máximo para atenderlo es de <strong>15 días hábiles</strong> desde el día hábil siguiente a su recepción; de no ser posible, se informarán los motivos y la respuesta definitiva no superará los <strong>8 días hábiles</strong> siguientes al término inicial. Para acudir a la SIC, el titular deberá haber agotado previamente el trámite de consulta o reclamo ante la compañía.</p>
+
+      <h3>13. Personas legitimadas para ejercer derechos</h3>
+      <ol>
+        <li>El titular de la información.</li>
+        <li>Los causahabientes, acreditando tal calidad.</li>
+        <li>Los representantes legales o apoderados debidamente facultados.</li>
+        <li>Las autoridades judiciales, administrativas o de control en ejercicio de sus funciones.</li>
+        <li>Las personas autorizadas expresamente por el titular.</li>
+        <li>Las demás personas legitimadas por disposición legal.</li>
+      </ol>
+
+      <h3>14. Autorización para el tratamiento de datos personales</h3>
+      <p>Como regla general, la compañía solicitará autorización previa, expresa e informada, salvo cuando la ley autorice el tratamiento sin consentimiento. La autorización podrá obtenerse por cualquier mecanismo que permita su consulta y verificación posterior (escritos, físicos, electrónicos, digitales, telefónicos, mensajes de datos, formularios web, grabaciones de voz, etc.). Los soportes se conservarán bajo condiciones adecuadas de seguridad.</p>
+
+      <h4>14.1. Fuentes de recolección de la información</h4>
+      <ul>
+        <li><strong>Datos suministrados directamente por el titular:</strong> formularios físicos o electrónicos, contratos, solicitudes, procesos de selección, comunicaciones, llamadas, correos, páginas web, redes sociales y aplicaciones.</li>
+        <li><strong>Datos obtenidos de terceros autorizados:</strong> siempre que cuenten con autorización válida o habilitación legal.</li>
+        <li><strong>Datos obtenidos de fuentes de acceso público:</strong> registros y bases de datos públicas cuya consulta esté autorizada por la ley.</li>
+      </ul>
+
+      <h4>14.2. Eventos en los que no se requiere autorización del titular</h4>
+      <ol>
+        <li>Información requerida por entidad pública o autoridad administrativa en ejercicio de funciones legales, o por orden judicial.</li>
+        <li>Datos de naturaleza pública.</li>
+        <li>Casos de urgencia médica o sanitaria debidamente acreditados.</li>
+        <li>Tratamiento autorizado por la ley con fines históricos, estadísticos, científicos o de investigación.</li>
+        <li>Datos relacionados con el registro civil o contenidos en registros públicos legalmente autorizados.</li>
+      </ol>
+
+      <h3>15. Medidas de seguridad y protección de la información</h3>
+      <p>La compañía adopta medidas técnicas, administrativas, físicas y organizacionales razonables para proteger los datos contra pérdida, alteración, acceso no autorizado, divulgación, uso indebido, destrucción o tratamiento fraudulento. Implementará controles de acceso, mecanismos de autenticación, copias de respaldo, gestión documental y protocolos de almacenamiento. Los datos solo serán tratados por personas autorizadas, obligadas a mantener confidencialidad incluso después de finalizada su relación con la compañía. Ningún sistema de seguridad es completamente infalible, pero la compañía realizará esfuerzos razonables para prevenir y responder ante incidentes.</p>
+
+      <h3>16. Vigencia de las bases de datos y de la política</h3>
+      <p>Conforme a los principios de finalidad, necesidad, libertad, veracidad, acceso y circulación restringida, seguridad y confidencialidad (artículos 4 y 11 de la Ley 1581 de 2012), los datos se conservarán solo durante el tiempo necesario para cumplir las finalidades que motivaron su recolección y las obligaciones legales, contractuales, contables, laborales, tributarias, comerciales, societarias, administrativas o judiciales aplicables. Cumplida la finalidad y sin obligación de conservación, la compañía podrá eliminar, suprimir, anonimizar o archivar los datos.</p>
+      <p>Las bases de datos tendrán vigencia mientras subsistan las finalidades legítimas del tratamiento. La política entra en vigencia desde su adopción y publicación, reemplaza cualquier política anterior y permanecerá vigente hasta ser modificada o sustituida. Cualquier modificación sustancial será informada a los titulares por los mecanismos que la compañía considere idóneos.</p>
+
+      <hr>
+      <p><strong>Fundamento normativo:</strong> Artículos 4, 8, 17 y 18 de la Ley 1581 de 2012; Título 2, Parte 2, Libro 2 del Decreto 1074 de 2015; y Sentencia C-748 de 2011 de la Corte Constitucional.</p>
+      <p><strong>Representante legal:</strong> Sebastián Botero Bueno — C.C. 1.094.898.447 — BTO CONSTRUCTORA S.A.S. — NIT 901.844.030-1</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= LEGAL MODAL — CLÁUSULA AUTORIZACIÓN ================= -->
+<div class="modal" id="modalClausula" role="dialog" aria-modal="true" aria-labelledby="modalClausulaTitle" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div>
+        <h2 id="modalClausulaTitle">Cláusula de Autorización para el Tratamiento de Datos Personales</h2>
+        <div class="modal-sub">BTO Constructora S.A.S. — NIT 901.844.030-1</div>
+      </div>
+      <button class="modal-close" aria-label="Cerrar" data-close>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="meta"><strong>Responsable:</strong>BTO CONSTRUCTORA S.A.S. — NIT 901.844.030-1 — Domicilio principal: Armenia, Quindío.</div>
+
+      <p>El Titular autoriza de manera libre, previa, expresa, informada e inequívoca a BTO CONSTRUCTORA S.A.S., en calidad de responsable del Tratamiento, para recolectar, almacenar, organizar, actualizar, conservar, consultar, usar, circular, compartir, transmitir, transferir, verificar, procesar y, en general, efectuar cualquier operación sobre sus datos personales, conforme a la Ley 1581 de 2012, el Decreto 1074 de 2015, las instrucciones de la Superintendencia de Industria y Comercio y demás normas que las modifiquen, adicionen o sustituyan.</p>
+      <p>La autorización comprende el tratamiento de la información suministrada durante las etapas precontractuales, contractuales y postcontractuales, así como aquella obtenida en desarrollo de las actividades comerciales, administrativas, financieras, laborales, jurídicas, técnicas, operativas y de servicio al cliente.</p>
+
+      <h3>Finalidades del tratamiento</h3>
+      <p>Los datos personales podrán ser utilizados, entre otras finalidades, para:</p>
+      <ol>
+        <li>Establecer contacto con el Titular.</li>
+        <li>Gestionar relaciones comerciales, laborales, contractuales o de prestación de servicios.</li>
+        <li>Promover y comercializar proyectos inmobiliarios, bienes y servicios.</li>
+        <li>Realizar estudios de crédito, validaciones documentales y verificaciones de capacidad financiera.</li>
+        <li>Gestionar procesos de vinculación con entidades fiduciarias, financieras, aseguradoras, notariales y registrales.</li>
+        <li>Atender solicitudes, peticiones, consultas, quejas y reclamos.</li>
+        <li>Efectuar actividades de mercadeo, publicidad, análisis estadísticos y estudios de mercado.</li>
+        <li>Cumplir obligaciones legales, regulatorias, tributarias, contables y contractuales.</li>
+        <li>Implementar medidas de seguridad y control.</li>
+        <li>Realizar consultas en listas restrictivas, bases de datos públicas o privadas y sistemas de administración del riesgo.</li>
+        <li>Desarrollar cualquier actividad necesaria para el cumplimiento del objeto social de BTO CONSTRUCTORA S.A.S.</li>
+      </ol>
+
+      <h3>Transferencia y transmisión de datos</h3>
+      <p>El Titular autoriza expresamente a transmitir o transferir sus datos personales a entidades fiduciarias, financieras, aseguradoras, proveedores, contratistas, aliados estratégicos, asesores externos, autoridades competentes y demás terceros cuya participación resulte necesaria para la ejecución de las actividades, proyectos, contratos o negocios jurídicos de la compañía, dentro o fuera del territorio nacional, siempre que dicha actuación se encuentre permitida por la ley.</p>
+
+      <h3>Consulta y verificación</h3>
+      <p>El Titular autoriza la consulta, verificación y actualización de la información ante centrales de información, operadores de información financiera, crediticia y comercial, listas restrictivas nacionales o internacionales, bases de datos públicas y demás fuentes legalmente autorizadas, cuando resulte necesario para la gestión de riesgos, el cumplimiento normativo o la ejecución de relaciones comerciales o contractuales.</p>
+
+      <h3>Uso de imágenes y registros audiovisuales</h3>
+      <p>Cuando resulte necesario, el Titular autoriza la captación, almacenamiento y utilización de imágenes, fotografías, grabaciones de video, registros audiovisuales y mecanismos de videovigilancia con fines de seguridad, control de acceso, protección de bienes y personas, cumplimiento contractual, atención de requerimientos de autoridad competente y demás finalidades legítimas previstas en la Política de Tratamiento de Datos Personales.</p>
+
+      <h3>Derechos del Titular</h3>
+      <p>El Titular conoce que le asisten los derechos de acceso, consulta, actualización, rectificación, supresión de datos y revocatoria de la autorización en los casos legalmente procedentes, los cuales podrá ejercer mediante solicitud dirigida a BTO CONSTRUCTORA S.A.S. a través de los canales de atención establecidos por la compañía.</p>
+      <p>Con la suscripción de este documento, el Titular declara haber sido informado acerca de la Política de Tratamiento de Datos Personales de BTO CONSTRUCTORA S.A.S., conocer su contenido y otorgar la presente autorización conforme a las finalidades allí establecidas.</p>
+    </div>
+  </div>
+</div>
 
 <!-- ================= LIGHTBOX ================= -->
 <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true" aria-label="Imagen ampliada">
@@ -1638,22 +1983,54 @@ img { display: block; max-width: 100%; }
   gallery.addEventListener('scroll', updIdx, { passive: true });
   updIdx();
 
-  // Lightbox
+  // Legal modals
+  const openModal = (id) => {
+    const m = document.getElementById(id); if (!m) return;
+    m.classList.add('open');
+    m.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    const body = m.querySelector('.modal-body'); if (body) body.scrollTop = 0;
+  };
+  const closeModal = (m) => {
+    m.classList.remove('open');
+    m.setAttribute('aria-hidden', 'true');
+    if (!document.querySelector('.modal.open')) document.body.classList.remove('modal-open');
+  };
+  document.querySelectorAll('[data-modal]').forEach(t => {
+    t.addEventListener('click', (e) => { e.preventDefault(); openModal(t.dataset.modal); });
+  });
+  document.querySelectorAll('.modal').forEach(m => {
+    m.addEventListener('click', (e) => { if (e.target === m) closeModal(m); });
+    m.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => closeModal(m)));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.modal.open').forEach(closeModal);
+  });
+
+  // Lightbox — supports multiple image sets (gallery + eco-collage)
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
   const lbCounter = document.getElementById('lbCounter');
-  let curIdx = 0;
-  const showLb = (i) => {
-    curIdx = (i + total) % total;
-    const img = items[curIdx].querySelector('img');
+  let curSet = items, curIdx = 0;
+  const showLb = (i, set) => {
+    if (set) curSet = set;
+    const n = curSet.length;
+    curIdx = (i + n) % n;
+    const img = curSet[curIdx].querySelector('img');
     lbImg.src = img.src;
     lbImg.alt = img.alt;
-    lbCounter.textContent = String(curIdx + 1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+    lbCounter.textContent = String(curIdx + 1).padStart(2,'0') + ' / ' + String(n).padStart(2,'0');
     lb.classList.add('open');
     lb.setAttribute('aria-hidden','false');
   };
   const closeLb = () => { lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); };
-  items.forEach((it, i) => it.addEventListener('click', () => showLb(i)));
+  items.forEach((it, i) => it.addEventListener('click', () => showLb(i, items)));
+
+  // Eco-collage as its own lightbox set
+  const ecoItems = document.querySelectorAll('.eco-collage .ec');
+  ecoItems.forEach((it, i) => it.addEventListener('click', () => showLb(i, ecoItems)));
+
   lb.querySelector('.lb-close').addEventListener('click', closeLb);
   lb.querySelector('.lb-prev').addEventListener('click', () => showLb(curIdx - 1));
   lb.querySelector('.lb-next').addEventListener('click', () => showLb(curIdx + 1));
