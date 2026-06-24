@@ -599,6 +599,10 @@ img { display: block; max-width: 100%; }
 .invest-row.reverse .media { order: 2; }
 .invest-row .media { aspect-ratio: 4/5; background: var(--bg-soft); border-radius: var(--radius-md); overflow: hidden; }
 .invest-row .media img { width:100%; height:100%; object-fit:cover; }
+.invest-row .media-video { aspect-ratio: 16/9; background: #000; align-self: center; }
+.invest-row .media-video iframe {
+  display: block; width: 100%; height: 100%; border: 0;
+}
 .invest-row .num {
   font-family: var(--f-mono); font-size: var(--t-xs); letter-spacing: .14em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 14px;
@@ -1323,16 +1327,20 @@ body.modal-open { overflow: hidden; }
   </div>
 
   <div class="invest-row reveal">
-    <div class="media"><img src="img/indigo-mall-drone-aereo.webp" alt="Vista aérea con dron del complejo Índigo Mall sobre la avenida" loading="lazy"></div>
+    <div class="media media-video">
+      <iframe src="https://www.youtube-nocookie.com/embed/nrQU3CXVPP8?rel=0&modestbranding=1" title="Índigo Mall — Ubicación estratégica" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+    </div>
     <div class="copy">
-      <div class="num">01 — Formato que baja vacancia</div>
+      <div class="num">01 — Ubicación estratégica</div>
       <h3>Mall de paso: diseñado para que nadie pase de largo.</h3>
       <p>El formato resuelve el mayor miedo del inversionista comercial: la vacancia. Acceso directo desde la avenida, parqueo en superficie sin costo, entrada inmediata al local. Y, sobre todo, una ubicación única: hoy no existe en este corredor un espacio con este formato. Índigo se convierte en el punto obligado para los miles de viajeros que cruzan el Eje Cafetero cada día.</p>
     </div>
   </div>
 
   <div class="invest-row reverse reveal">
-    <div class="media"><img src="img/letrero-frontal-bodega-industrial.webp" alt="Letrero frontal del complejo Índigo Mall" loading="lazy"></div>
+    <div class="media media-video">
+      <iframe src="https://www.youtube-nocookie.com/embed/FkFaTGPJ9a4?rel=0&modestbranding=1" title="Índigo Mall — Etapa de preventa" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+    </div>
     <div class="copy">
       <div class="num">02 — Entrada en etapa favorable</div>
       <h3>El 76% ya se vendió. Esta es la última ventana.</h3>
